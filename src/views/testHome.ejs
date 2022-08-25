@@ -1,0 +1,18 @@
+<%- include("partials/header", {tituloWeb: "Productos"}) -%> <%-
+include("partials/body") -%>
+<h1 class="col-12 text-center">Lista de productos</h1>
+<table>
+	<thead>
+		<tr>
+			<th>Nombre</th>
+			<th>Precio</th>
+			<th>Foto</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for (let i = 0; i < 5; i++) { %> <%- include("partials/tableTestElement",
+		{ nombre: response.nombres[i], foto: response.fotos[i], precio:
+		response.precios[i]}) %> <% }; %>
+	</tbody>
+</table>
+<%- include("partials/footer") -%>
