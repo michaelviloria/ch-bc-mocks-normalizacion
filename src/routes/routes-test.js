@@ -26,10 +26,8 @@ const fakerProducts = () => {
 		fotos: fotos,
 	};
 };
-console.log(fakerProducts());
 
 routerTest.get("/", (req, res) => {
-	console.log({ response: fakerProducts() });
 	res.render("testHome", { response: fakerProducts(), message: "ok" });
 });
 

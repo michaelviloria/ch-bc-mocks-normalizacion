@@ -7,6 +7,7 @@ export const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
 import router from "./routes/routes.js";
+import routerTest from "./routes/routes-test.js";
 
 app.use(express.static("./public"));
 app.use("/api/productos", router);
@@ -18,20 +19,22 @@ app.set("view engine", ".ejs");
 app.set("views", "./src/views");
 
 // <------------------------- Clases ------------------------->
-import { optionsMySQL, optionsSQLite } from "./DB/options.js";
 
-import Contenedor from "./contenedor.js";
+import optionsDB from "./DB/options.js";
+
+import Contenedor from "./DAO/contenedor.js";
 const contenedor = new Contenedor({
-	options: optionsMySQL.options,
-	table: optionsMySQL.table,
+	options: optionsDB,
+	table: "products",
 });
 
-import Chat from "./chat.js";
-import routerTest from "./routes/routes-test.js";
-const chat = new Chat({
-	options: optionsSQLite.options,
-	table: optionsSQLite.table,
-});
+import Chat from "./DAO/chat.js";
+const chat = new Chat("chat");
+
+// <------------------------- Normalizer ------------------------->
+
+import normalizrMessages from "./utils/normalizrMessages.js";
+normalizrMessages(await chat.getAll());
 
 // <------------------------- Sockets ------------------------->
 

@@ -2,12 +2,12 @@ import express from "express";
 const router = express.Router();
 
 // <------------------------- Contenedor de Productos ------------------------->
-import { optionsMySQL } from "../DB/options.js";
-import Contenedor from "../contenedor.js";
+import optionsDB from "../DB/options.js";
+import Contenedor from "../DAO/contenedor.js";
 
 const contenedor = new Contenedor({
-	options: optionsMySQL.options,
-	table: optionsMySQL.table,
+	options: optionsDB,
+	table: "products",
 });
 
 // <------------------------- Configuracion Rutas ------------------------->
